@@ -371,6 +371,9 @@ function(gn_desc_target_defines OUTPUT BUILD_DIR TARGET)
         WHAT_TO_DISPLAY defines)
     # exclude system defines such as _HAS_EXCEPTIONS=0
     list(FILTER OUTPUT_ EXCLUDE REGEX "^_")
+	# Toggle SKIA_IMPLEMENTATION flag to 0 in order to create correct export 
+	# defines for Windows build.
+	list(TRANSFORM  OUTPUT_ REPLACE "SKIA_IMPLEMENTATION=1" "SKIA_IMPLEMENTATION=0")
     set(${OUTPUT} ${OUTPUT_} PARENT_SCOPE)
 endfunction()
 
